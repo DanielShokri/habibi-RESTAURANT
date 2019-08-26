@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+body, html {
+  height: 100%;
+}
+
+/* The hero image */
+
+.hero-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://media1.popsugar-assets.com/files/thumbor/48zKkKLtc6dX_fB5GyDSSoX6-Sk/fit-in/2048xorig/filters:format_auto-!!-:strip_icc-!!-/2018/03/14/447/n/38922820/tmp_2Dj2kY_e73655a1bfed29f1_Chulu_Kabab.jpg");
+  /* Set a specific height */
+  height: 100vh;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Place text in the middle of the image */
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.home-title {
+  color: #FFF;
+  line-height: 1.3;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 5rem;
+  margin: 186px 0 25px 0;
+}
+
+.food-desc {
+  color: #ff8b38;
+  font-size: 18px;
+  font-family: 'Raleway', sans-serif;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.4em;
+  letter-spacing: 3px;
+}
+
+/* Restaurant Section */
+
+.section-wrapper {
+  box-sizing: border-box;
+  max-width: 1080px;
+  padding: 60px 34px;
+  margin: auto;
+  text-align: left;
+  /* display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(2, 1fr); */
+  /* font-family: Raleway; */
+  font-weight: 500;
+  font-style: normal;
+  font-size: 15px;
+  letter-spacing: .4px;
+  line-height: 1.6em;
+  color: rgba(28, 28, 28, .9);
+}
+
+.section-restaurant-title {
+  grid-column: 1/4;
+}
