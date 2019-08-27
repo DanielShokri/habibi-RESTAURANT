@@ -1,0 +1,41 @@
+.menu-hero {
+    background-image: url("https://i.imgur.com/5rsMN9p.png");
+    height: 1100px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.menu-img {
+    height: auto;
+    width: auto;
+}
+
+.bg-menu {
+    margin-top: 60px;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.squarespace-cdn.com/content/v1/54aaf38be4b03ccd2a134602/1420490684210-TBD3KASBUN5VFVVQR92Z/ke17ZwdGBToddI8pDm48kI6qHJApXjb1O6VGhwrFM1MUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8N_N4V1vUb5AoIIIbLZhVYxCRW4BPu10St3TBAUQYVKcWiCyzztY1_Gq7oPjIsQwgA-nzd8KS7iFnGPuS-Q_aKkNQ9ks28AEBOZV1lk5S8S2/Capture.JPG?format=2500w");
+    height: 150vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+@media only screen and (max-width:376px) {
+    .menu-img {
+        width: 100%;
+        height: 100%;
+    }
+    .bg-menu {
+        height: auto;
+        width: auto;
+    }
+}
+
+@media only screen and (max-width:415px) {
+    .menu-img {
+        width: 100%;
+    }
+    .bg-menu {
+        height: auto;
+    }
+}

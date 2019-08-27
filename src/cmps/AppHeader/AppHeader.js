@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import './AppHeader.css'
+import { Link, animateScroll as scroll } from "react-scroll";
+
 class AppHeader extends Component {
 
     render() {
         return (
             <header className="header">
-                <a className="logo" href=".page-top">Habibi</a>
+                <a className="logo" href=".page-top">HABIBI</a>
                 <input className="menu-btn" type="checkbox" id="menu-btn" />
                 <label className="menu-icon" htmlFor="menu-btn"><span className="navicon"></span></label>
                 <ul className="menu">
