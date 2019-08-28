@@ -143,22 +143,6 @@ p {
     h2 {
         font-size: 28px;
     }
-    .footer {
-        padding: 70px 0
-    }
-    .footer ul {
-        margin-top: 15px
-    }
-    .footer ul li {
-        display: inline-block;
-        margin: 0 0 0 10px
-    }
-    .footer .foot-content-left {
-        float: left
-    }
-    .footer .foot-content {
-        float: right
-    }
 }
 
 @media only screen and (min-width:992px) {
@@ -190,7 +174,7 @@ p {
 
 .header {
     /* background-color: #fff; */
-    position: fixed;
+    position: absolute;
     width: 80%;
     z-index: 3;
     margin-left: 10%;
@@ -361,12 +345,7 @@ p {
     }
 }
 
-.footer {
-    font-size: 14px;
-    padding: 40px 0;
-    background: #fff;
-    color: #888
-}
+
 
 .footer .container {
     position: relative

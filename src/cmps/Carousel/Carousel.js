@@ -6,7 +6,7 @@ import './Carousel.css'
 export default class Carousel extends Component {
   render() {
     var settings = {
-      dots: true,
+      dots: false,
       infinite: true,
       slidesToShow: 3,
       slidesToScroll: 1,

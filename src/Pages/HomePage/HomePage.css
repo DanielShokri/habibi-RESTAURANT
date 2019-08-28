@@ -27,9 +27,9 @@ p {
   position: relative;
 }
 
-.hero-image:before, .hero-image:after {
+/* .hero-image:before, .hero-image:after {
 	content: "";
-	border-bottom: 15px solid white;
+	border-bottom: 20px solid white;
 	height: 0px;
 	width: 50%;
 	position: absolute;
@@ -45,7 +45,7 @@ p {
 	right: 0;
 	border-left: 15px solid rgba(0,0,0,0);
 	border-right: none;
-}
+} */
 
 /* Place text in the middle of the image */
 
@@ -64,7 +64,7 @@ p {
   font-family: Montserrat;
   font-weight: 600;
   font-size: 5rem;
-  margin: 186px 0 25px 0;
+  margin: 117px 0 25px 0;
 }
 
 .food-desc {
@@ -125,5 +125,9 @@ p {
   .side-bar {
     width: 100%;
     text-align: center;
+  }
+  .home-title { 
+    font-size: 3.5rem;
+    margin: 251px 0 25px 0;
   }
 }

@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import './HomePage.css'
 import { Button } from 'antd';
 import Carousel from '../../cmps/Carousel/Carousel'
+import { NavLink } from "react-router-dom";
+
 import Menu from '../../cmps/Menu/Menu'
 import ReservationHero from '../../cmps/Reservation/ReservationHero'
+import Footer from '../../cmps/Footer/Footer'
+import AppHeader from '../../cmps/AppHeader/AppHeader'
 
 class HomePage extends Component {
 
@@ -11,7 +15,8 @@ class HomePage extends Component {
     render() {
         return (
             <div>
-                <div className="hero-image">
+                <AppHeader></AppHeader>
+                <div className="hero-image" id="home">
                 </div>
                 <div className="hero-text">
                     <h1 className="home-title">Israeli Cuisine in Tel-Aviv</h1>
@@ -19,7 +24,7 @@ class HomePage extends Component {
                     <h3 className="food-desc">Kabobs × hummus&nbsp;× TAbboulleh&nbsp;× pita wraps</h3>
                 </div>
                 <div className="section-wrapper">
-                    <div className="res-desc">
+                    <div className="res-desc" id="restaurant">
                         <h2 className="section-restaurant-title">A little about us</h2>
                         <p><strong>At Habibi Israeli Restaurant, we offer customers authentic Israeli cuisine. With a variety of traditional dishes, there is something to appeal to anyone.</strong></p>
 
@@ -37,7 +42,7 @@ class HomePage extends Component {
                             In addition to our lunch, catering and takeout services, we offer a fine dining experience for dinner.  Dinner is offered daily from 4:00pm - 9:30pm except on Sundays. All of our items are prepared fresh daily, and meals are cooked to order. We also serve a variety of deserts such as bakalava and namoura. We now also offer free Wi-Fi and military members will receive a 10% discount on an individual meal. </p>
                     </div>
                     <div className="side-bar">
-                        <Button>Make A Reservation</Button>
+                        <Button><NavLink to="/reservation">Make A Reservation</NavLink></Button>
                         <h3 className="sidebar-details">PHONE</h3>
                         <p>08-445-8874</p>
                         <h3 className="sidebar-details">LOCATION</h3>
@@ -50,6 +55,7 @@ class HomePage extends Component {
                 <Carousel></Carousel>
                 <Menu></Menu>
                 <ReservationHero></ReservationHero>
+                <Footer></Footer>
             </div>
         )
     }
