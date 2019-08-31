@@ -1,104 +1,134 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './ReservationPage.css'
-import { DatePicker, InputNumber } from 'antd';
+import { Button } from 'antd';
+import { InputNumber, DatePicker, TimePicker, Radio, Checkbox } from "@jbuschke/formik-antd";
+import { withFormik } from 'formik';
+import { NavLink } from "react-router-dom";
+import * as yup from 'yup';
+import moment from 'moment';
 
+const format = 'HH:mm';
 
-class ReservationPage extends Component {
+const ReservationPage = ({
+    handleChange,
+    handleSubmit,
+    values,
+    errors,
+    touched,
+    handleBlur,
+    isSubmitting
+}) => (
+        < div >
+            <h2>Habibi Restaurant</h2>
 
-    onChange = (date, dateString) => {
-        console.log(date, dateString);
-    }
+            <h2 className="gradient-multiline"><span>Reservations</span></h2>
 
-    render() {
-        return (
-            <div>
-                <h2>Habibi Restaurant</h2>
-
-                <h2 class="gradient-multiline"><span>Reservations</span></h2>
-
-                <div class="container">
-                    <form>
-                        <div class="row">
-                            <h4>Reservation</h4>
-                            <div class="input-group input-group-icon">
-                                <input type="text" placeholder="Full Name" />
-                                <div class="input-icon"><i class="fa fa-user"></i></div>
+            <div className="container">
+                <form onSubmit={handleSubmit}>
+                    <div className="row">
+                        <h4>Reservation</h4>
+                        <div className="input-group input-group-icon">
+                            <div>
+                                <input type="text" onBlur={handleBlur} placeholder="Full Name" name="fullName" onChange={handleChange} />
+                                {touched.fullName && errors.fullName && <p className="form-error-msg">{errors.fullName}</p>}
                             </div>
-                            <div class="input-group input-group-icon">
-                                <input type="email" placeholder="Email Adress" />
-                                <div class="input-icon"><i class="fa fa-envelope"></i></div>
+                            <div className="input-icon"><i className="fa fa-user"></i></div>
+                        </div>
+                        <div className="input-group input-group-icon">
+                            <div>
+                                <input type="text" placeholder="Email Address" name="email" onChange={handleChange} />
+                                {touched.email && errors.email && <p className="form-error-msg">{errors.email}</p>}
                             </div>
-                            <div class="input-group input-group-icon">
-                                <input type="number" placeholder="Phone Number" />
-                                <div class="input-icon"><i class="fas fa-phone"></i></div>
+                            <div className="input-icon"><i className="fa fa-envelope"></i></div>
+                        </div>
+                        <div className="input-group input-group-icon">
+                            <div>
+                                <input type="text" placeholder="Phone Number" name="phone" onChange={handleChange} />
+                                {touched.phone && errors.phone && <p className="form-error-msg">{errors.phone}</p>}
+                            </div>
+                            <div className="input-icon"><i className="fas fa-phone"></i></div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-half">
+                            <h4>Pick a Date</h4>
+                            <div className="input-group">
+                                <DatePicker classNameName="date-pick" disabledDate={(current) => {
+                                    return moment().add(-1, 'days') >= current ||
+                                        moment().add(1, 'month') <= current;
+                                }} name="date" />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-half">
-                                <h4>Pick a Date</h4>
-                                <div class="input-group">
-                                    <DatePicker className="date-pick" onChange={this.onChange} />
-                                </div>
-                            </div>
-                            <div class="col-half">
-                                <h4>Time</h4>
-                                <div class="input-group">
-                                    <InputNumber size="large" min={1} max={10} defaultValue={2} onChange={this.onChange} />
-                                </div>
-                            </div>
-                            <div class="col-half">
-                                <h4>For How Much?</h4>
-                                <div class="input-group">
-                                    <InputNumber size="large" min={1} max={10} defaultValue={2} onChange={this.onChange} />
-                                </div>
+                        <div className="col-half">
+                            <h4>Time</h4>
+                            <div className="input-group">
+                                <TimePicker name="time" disabledHours={() => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]} defaultValue={moment('12:08', format)} format={format} />
                             </div>
                         </div>
-                        <div class="row">
-                            <h4>Smoking?</h4>
-                            <div class="input-group">
-                                <input type="radio" name="payment-method" value="card" id="payment-method-card" checked="true" />
-                                <label for="payment-method-card"><span><i class="fas fa-smoking"></i>Yes</span></label>
-                                <input type="radio" name="payment-method" value="paypal" id="payment-method-paypal" />
-                                <label for="payment-method-paypal"> <span><i style={{ fontSize: 18 + 'px' }} class="fas fa-smoking-ban"></i>No</span></label>
-                            </div>
-                            <div class="input-group input-group-icon">
-                                <input type="text" placeholder="Card Number" />
-                                <div class="input-icon"><i class="fa fa-credit-card"></i></div>
-                            </div>
-                            <div class="col-half">
-                                <div class="input-group input-group-icon">
-                                    <input type="text" placeholder="Card CVC" />
-                                    <div class="input-icon"><i class="fa fa-user"></i></div>
-                                </div>
-                            </div>
-                            <div class="col-half">
-                                <div class="input-group">
-                                    <select>
-                                        <option>01 Jan</option>
-                                        <option>02 Jan</option>
-                                    </select>
-                                    <select>
-                                        <option>2015</option>
-                                        <option>2016</option>
-                                    </select>
-                                </div>
+                        <div className="col-half">
+                            <h4>For How Much?</h4>
+                            <div className="input-group">
+                                <InputNumber size="large" name="people" min={2} max={10} />
                             </div>
                         </div>
-                        <div class="row">
-                            <h4>Terms and Conditions</h4>
-                            <div class="input-group">
-                                <input type="checkbox" id="terms" />
-                                <label for="terms">I accept the terms and conditions for signing up to this service, and hereby confirm I have read the privacy policy.</label>
-                            </div>
+                    </div>
+                    <div className="row">
+                        <h4>Smoking?</h4>
+                        <div className="input-group">
+                            <Radio.Group name="smoking" size="default">
+                                <Radio.Button value={true}><i className="fas fa-smoking"></i> Yes</Radio.Button>
+                                <Radio.Button value={false}>No <i style={{ fontSize: 17 + 'px' }} className="fas fa-smoking-ban"></i></Radio.Button>
+                            </Radio.Group>
                         </div>
-                    </form>
-                </div>
 
+                    </div>
+                    <div className="row">
+                        <h4>Terms and Conditions</h4>
+                        <div className="input-group">
+                            <Checkbox name="terms"></Checkbox>
+                            <label htmlFor="terms">I accept the terms and conditions for reserve table in Habibi restaurant, and hereby confirm I have read the privacy policy.</label>
+                            <div>
+                                {touched.terms && errors.terms && <p className="form-error-msg">{errors.terms}</p>}
+                            </div>
+                        </div>
+                        <Button htmlType="submit" type="primary" disabled={isSubmitting}>Submit</Button>
+                    </div>
+                </form>
             </div>
-        )
-    }
+            <Button type="danger" className="go-back-btn" ghost><NavLink to="/">Go Back</NavLink></Button>
+        </div>
+    )
 
-}
+const phoneRegex = new RegExp('^[0][5][0|2|3|4|5|9]{1}[-]{0,1}[0-9]{7}$')
 
+const FromikApp = withFormik({
+    mapPropsToValues() {
+        return {
+            fullName: '',
+            email: '',
+            phone: '',
+            date: moment(),
+            time: moment(),
+            people: 2,
+            smoking: false,
+            terms: false
+        }
+    },
+    validationSchema: yup.object().shape({
+        email: yup.string().email().required('*email is required field'),
+        terms: yup.boolean().oneOf([true], '*You Must Accept Terms and Conditions'),
+        phone: yup.string().matches(phoneRegex, '*Phone number is not valid').required('*Phone Number is required field'),
+        fullName: yup.string().min(5, '*Please enter full name').max(40, '*Please enter no more than 40 characters').required('*Please enter your full name'),
+    }),
+    handleSubmit: (values, { setSubmitting, resetForm }) => {
+        setTimeout(() => {
+            console.log(JSON.stringify(values, null, 2));
+            console.log(moment(values.time).format('LT'))
+            console.log(moment(values.date).format('ll'))
+            setSubmitting(false);
+            resetForm();
+        }, 2000);
+    },
+})(ReservationPage)
 
-export default ReservationPage;
+export default FromikApp;
