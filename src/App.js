@@ -5,6 +5,7 @@ import { HashRouter as Router, Route, Switch, Redirect } from "react-router-dom"
 
 import HomePage from './Pages/HomePage/HomePage'
 import ReservationPage from './Pages/ReservationPage/ReservationPage'
+import CalendarPage from './Pages/CalendarPage/CalendarPage'
 
 class App extends Component {
   render() {
@@ -16,6 +17,9 @@ class App extends Component {
             <Route exact path="/" component={HomePage} />
 
             <Route exact path="/reservation" component={ReservationPage} />
+
+
+            <Route exact path="/calendar" component={CalendarPage} />
           </Switch>
         </Router>
 

@@ -1,11 +1,12 @@
 import React from 'react';
 import './ReservationPage.css'
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { InputNumber, DatePicker, TimePicker, Radio, Checkbox } from "@jbuschke/formik-antd";
 import { withFormik } from 'formik';
 import { NavLink } from "react-router-dom";
 import * as yup from 'yup';
 import moment from 'moment';
+import ReservationService from '../../Services/ReservationService'
 
 const format = 'HH:mm';
 
@@ -29,8 +30,8 @@ const ReservationPage = ({
                         <h4>Reservation</h4>
                         <div className="input-group input-group-icon">
                             <div>
-                                <input type="text" onBlur={handleBlur} placeholder="Full Name" name="fullName" onChange={handleChange} />
-                                {touched.fullName && errors.fullName && <p className="form-error-msg">{errors.fullName}</p>}
+                                <input type="text" onBlur={handleBlur} placeholder="Full Name" name="title" onChange={handleChange} />
+                                {touched.title && errors.title && <p className="form-error-msg">{errors.title}</p>}
                             </div>
                             <div className="input-icon"><i className="fa fa-user"></i></div>
                         </div>
@@ -56,13 +57,13 @@ const ReservationPage = ({
                                 <DatePicker classNameName="date-pick" disabledDate={(current) => {
                                     return moment().add(-1, 'days') >= current ||
                                         moment().add(1, 'month') <= current;
-                                }} name="date" />
+                                }} name="start" />
                             </div>
                         </div>
                         <div className="col-half">
                             <h4>Time</h4>
                             <div className="input-group">
-                                <TimePicker name="time" disabledHours={() => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]} defaultValue={moment('12:08', format)} format={format} />
+                                <TimePicker name="end" disabledHours={() => [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]} defaultValue={moment('12:08', format)} format={format} />
                             </div>
                         </div>
                         <div className="col-half">
@@ -94,7 +95,7 @@ const ReservationPage = ({
                         <Button htmlType="submit" type="primary" disabled={isSubmitting}>Submit</Button>
                     </div>
                 </form>
-            </div>
+            </div> 
             <Button type="danger" className="go-back-btn" ghost><NavLink to="/">Go Back</NavLink></Button>
         </div>
     )
@@ -104,11 +105,11 @@ const phoneRegex = new RegExp('^[0][5][0|2|3|4|5|9]{1}[-]{0,1}[0-9]{7}$')
 const FromikApp = withFormik({
     mapPropsToValues() {
         return {
-            fullName: '',
+            title: '',
             email: '',
             phone: '',
-            date: moment(),
-            time: moment(),
+            start: moment().toDate(),
+            end: moment().toDate(),
             people: 2,
             smoking: false,
             terms: false
@@ -118,13 +119,13 @@ const FromikApp = withFormik({
         email: yup.string().email().required('*email is required field'),
         terms: yup.boolean().oneOf([true], '*You Must Accept Terms and Conditions'),
         phone: yup.string().matches(phoneRegex, '*Phone number is not valid').required('*Phone Number is required field'),
-        fullName: yup.string().min(5, '*Please enter full name').max(40, '*Please enter no more than 40 characters').required('*Please enter your full name'),
+        title: yup.string().min(5, '*Please enter full name').max(40, '*Please enter no more than 40 characters').required('*Please enter your full name'),
     }),
     handleSubmit: (values, { setSubmitting, resetForm }) => {
         setTimeout(() => {
-            console.log(JSON.stringify(values, null, 2));
-            console.log(moment(values.time).format('LT'))
-            console.log(moment(values.date).format('ll'))
+            ReservationService.addReservation(values).then(()=>{
+                message.success('The reservation is booked successfully')
+            })
             setSubmitting(false);
             resetForm();
         }, 2000);
