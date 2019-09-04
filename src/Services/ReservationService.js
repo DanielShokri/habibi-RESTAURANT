@@ -9,39 +9,33 @@ export default {
 
 
 let reservations = [
+
     {
         email: "danielshokri@gmail.com",
-        end: "2019-09-01T12:08:57.541Z",
-        people: 2,
-        phone: "052-4337900",
-        smoking: false,
-        start: "2019-09-02T10:08:57.541Z",
-        terms: true,
-        title: "moshe",
-        _id: "cWVZJk1YDS",
-    },
-    {
-        email: "danielshokri@gmail.com",
-        end: "2019-09-01T12:08:57.541Z",
-        people: 2,
+        people: 4,
         phone: "052-4337900",
         smoking: true,
-        start: "2019-09-02T10:08:57.541Z",
+        start: "2019-09-09T18:35:43.384Z",
         terms: true,
-        title: "dani",
-        _id: "cWVZJk1YDS",
-    },
-
+        title: "daniel",
+        _id: "MmoMaKUNvT"
+    }
 ]
 
 
 function getReservations() {
     let reservationDB = StorageService.load('reservations')
-    if (reservationDB) return Promise.resolve(reservationDB)
-    return new Promise((resolve, reject) => {
-        resolve(reservations)
+    if (reservationDB) {
         StorageService.save('reservations', reservations);
-    })
+        return Promise.resolve(reservationDB)
+    }
+    else {
+        return new Promise((resolve, reject) => {
+            StorageService.save('reservations', reservations);
+            resolve(reservations)
+        })
+
+    }
 }
 
 
@@ -52,8 +46,8 @@ function addReservation(reservation) {
         reservation._id = _makeId()
         reservations.push(reservation)
         StorageService.save('reservations', reservations);
-        resolve(reservations)
         console.log('The resesvation is save!')
+        resolve(reservations)
     })
 }
 
