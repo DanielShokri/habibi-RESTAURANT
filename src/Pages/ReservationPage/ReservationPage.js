@@ -9,7 +9,7 @@ import moment from 'moment';
 import ReservationService from '../../Services/ReservationService'
 // import 'moment/locale/he';
 const format = 'HH:mm';
-
+neccery
 
 // const ReservationPage = ({
 //     handleChange,
@@ -147,9 +147,8 @@ const FromikApp = withFormik({
                 message.success('The reservation is booked successfully')
             })
             setSubmitting(false);
-            console.log(props.history)
+            //For now no need to push to calender
             // props.history.push("/calendar")
-            resetForm();
         }, 3000);
     },
 })(ReservationPage)

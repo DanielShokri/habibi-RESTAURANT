@@ -46,7 +46,7 @@ function addReservation(reservation) {
         reservation._id = _makeId()
         reservations.push(reservation)
         StorageService.save('reservations', reservations);
-        console.log('The resesvation is save!')
+        console.log('The reservation is save!')
         resolve(reservations)
     })
 }
